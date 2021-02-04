@@ -28,7 +28,7 @@ export default function App() {
     
     const like = response.data;
 
-    setRepositories([...repositories, like]);
+    setRepositories([like]);
   }
 
   return (
