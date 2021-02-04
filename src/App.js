@@ -35,9 +35,11 @@ export default function App() {
         return repository;
       }
     });
+
+    setRepositories([repositoryId]);
   }
 
-  setRepositories([...repositories, likeId])
+  
 
   return (
     <>
