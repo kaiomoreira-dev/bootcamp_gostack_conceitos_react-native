@@ -30,7 +30,13 @@ export default function App() {
 
     const likeInfo = response.data;
 
-    
+    const repoLIke = repositories.map(repository => {
+       if(likeInfo.id === repository.id){
+         return likeInfo;
+       }else {
+         return repository;
+       }
+    });
 
     setRepositories([...repositories,likeInfo]);
 
