@@ -26,10 +26,8 @@ export default function App() {
   async function handleLikeRepository(id) {
     const response = await api.put(`repositories/${id}/like`);
 
-    console.log(response.data)
-
     const likeInfo = response.data;
-
+    
     setRepositories([likeInfo]);
 
   }
@@ -60,7 +58,7 @@ export default function App() {
                   // Remember to replace "1" below with repository ID: {}
                   testID={`repository-likes-${repository.id}`}
                 >
-                  {repository.likes} curtidas
+                  {`${repository.likes} curtidas`}
                 </Text>
               </View>
 
