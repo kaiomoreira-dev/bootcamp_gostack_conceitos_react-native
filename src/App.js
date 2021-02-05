@@ -30,15 +30,7 @@ export default function App() {
 
     const likeInfo = response.data;
 
-    const repoLIke = repositories.map(repository => {
-       if(likeInfo.id === repository.id){
-         return likeInfo;
-       }else {
-         return repository;
-       }
-    });
-
-    setRepositories([...repositories,likeInfo]);
+    setRepositories([likeInfo]);
 
   }
 
@@ -68,7 +60,7 @@ export default function App() {
                   // Remember to replace "1" below with repository ID: {}
                   testID={`repository-likes-${repository.id}`}
                 >
-                  {repository.likes}
+                  {repository.likes} curtidas
                 </Text>
               </View>
 
