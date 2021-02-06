@@ -28,16 +28,13 @@ export default function App() {
 
     const newLikeInfo = response.data;
     
-    const repoOptionLIke = repositories.map(repository => {
-      if(repository.id === id){
-        return newLikeInfo;
-      }else{
-        return repository;
-      }
-    });
+    const likeId = repositories.find(repository => repository.id === id);
 
-    setRepositories([repoOptionLIke]);
-
+    if(!likeId){
+      return setRepositories([newLikeInfo]);
+    }else{
+      return setRepositories([...repositories]);
+    }
   }
 
   
@@ -49,13 +46,13 @@ export default function App() {
       <FlatList
             data={repositories}
             keyExtractor={repository => repository.id}
-            renderItem={({item: repository}) => (
+            renderItem={({item}) => (
             <View style={styles.repositoryContainer}>
 
-              <Text style={styles.repository}>{repository.title}</Text>
+              <Text style={styles.repository}>{item.title}</Text>
 
               <View style={styles.techsContainer}>
-                {repository.techs.map(tech => (
+                {item.techs.map(tech => (
                   <Text style={styles.tech} key={tech}>{tech}</Text>
                 ))}
               </View>      
@@ -64,17 +61,17 @@ export default function App() {
                 <Text
                   style={styles.likeText}
                   // Remember to replace "1" below with repository ID: {}
-                  testID={`repository-likes-${repository.id}`}
+                  testID={`repository-likes-${item.id}`}
                 >
-                  {repository.likes} curtidas
+                  {item.likes} curtidas
                 </Text>
               </View>
 
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => handleLikeRepository(repository.id)}
+                onPress={() => handleLikeRepository(item.id)}
                 // Remember to replace "1" below with repository ID: {}
-                testID={`like-button-${repository.id}`}
+                testID={`like-button-${item.id}`}
               >
                 <Text style={styles.buttonText}>Curtir</Text>
               </TouchableOpacity>
